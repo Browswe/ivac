@@ -9,7 +9,7 @@ button.s{background:#e8eefc;color:#173b7a}button.d{background:#d92d20}.status{fo
 .row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.toggle{width:auto;margin:0}.watch{font-weight:700}
 .small{font-size:10px;color:#667085;line-height:1.4}.ok{color:#067647}.warn{color:#b54708}
 </style></head><body>
-<h2>IVAC Assistant <span style="font-size:11px">v3.0</span></h2>
+<h2>IVAC Assistant <span style="font-size:11px">v4.0</span></h2>
 <div class="muted">Profiles • Auto Fill • Slot Watch • Alerts</div>
 
 <div class="section">
@@ -45,7 +45,7 @@ button.s{background:#e8eefc;color:#173b7a}button.d{background:#d92d20}.status{fo
 <div><label>Refresh interval (seconds)</label><input id="interval" type="number" min="10" max="300" value="30"></div>
 <div><label>Preferred centre</label><input id="preferredCenter" placeholder="Sylhet"></div>
 </div>
-<button id="check" class="s">Check This Page Now</button>
+<button id="check" class="s">Check This Page Now</button><button id="validate" class="s">Validate Current Profile</button><div id="validation" class="small"></div><div id="history" class="small"></div>
 <div class="grid">
 <div><label>Preferred date from</label><input id="dateFrom" type="date"></div>
 <div><label>Preferred date to</label><input id="dateTo" type="date"></div>
@@ -60,7 +60,7 @@ button.s{background:#e8eefc;color:#173b7a}button.d{background:#d92d20}.status{fo
 <div class="section">
 <div class="watch">⏱️ Booking Timer & Checklist</div>
 <div class="row"><div id="timer">15:00</div><button id="startTimer" class="s">Start 15-Min Timer</button></div>
-<div id="checklist" class="small">□ Login<br>□ Primary Webfile<br>□ Secondary Webfiles<br>□ IVAC Centre<br>□ Appointment Date<br>□ Payment<br>□ Invoice</div>
+<div id="checklist" class="small"><label><input type="checkbox" data-step="login"> Login</label><label><input type="checkbox" data-step="primary"> Primary Webfile</label><label><input type="checkbox" data-step="secondary"> Secondary Webfiles</label><label><input type="checkbox" data-step="centre"> IVAC Centre</label><label><input type="checkbox" data-step="date"> Appointment Date</label><label><input type="checkbox" data-step="payment"> Payment</label><label><input type="checkbox" data-step="invoice"> Invoice</label></div>
 </div>
 
 <button id="open" class="s">Open IVAC Appointment</button>
