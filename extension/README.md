@@ -1,12 +1,19 @@
-# IVAC Assistant Chrome Extension
+# IVAC Assistant v2
 
-## Install in Chrome
+## Features
+- Multiple applicant profiles
+- Save Profile
+- Switch/load profiles
+- Auto Fill for detected IVAC/Indian Visa application fields
+- Clear Form
+- Delete Profile
+- Clear All Saved Profiles
+- Local Chrome storage
+
+## Install
 1. Open chrome://extensions
-2. Enable Developer mode.
-3. Click Load unpacked.
-4. Select this `extension` folder.
-5. Pin **IVAC Assistant** to the toolbar.
+2. Enable Developer mode
+3. Click Load unpacked
+4. Select the **extension** folder
 
-The extension uses Manifest V3 and provides local storage plus basic form assistance on IVAC pages.
-
-It does not bypass CAPTCHA, queues, security controls, or appointment restrictions.
+Review every field before submission. This extension does not bypass CAPTCHA, OTP, appointment queues, rate limits, payment controls, or other security controls.
