@@ -1,27 +1,7 @@
-function setValue(input, value) {
-  if (!input || !value) return;
-  const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set;
-  if (setter) setter.call(input, value); else input.value = value;
-  input.dispatchEvent(new Event("input", {bubbles:true}));
-  input.dispatchEvent(new Event("change", {bubbles:true}));
-}
-
-function findField(patterns) {
-  const fields = [...document.querySelectorAll("input, textarea")];
-  return fields.find(el => {
-    const text = [
-      el.name, el.id, el.placeholder, el.getAttribute("aria-label")
-    ].filter(Boolean).join(" ").toLowerCase();
-    return patterns.some(p => text.includes(p));
-  });
-}
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message?.type !== "FILL_FORM") return;
-  const d = message.data || {};
-  setValue(findField(["full name","applicant name","name"]), d.name);
-  setValue(findField(["passport","passport no","passport number"]), d.passport);
-  setValue(findField(["mobile","phone","contact"]), d.phone);
-  sendResponse?.({ok:true});
-  return true;
-});
+const MAP={givenName:["given name","givenname","first name","applicant name"],surname:["surname","last name","family name"],dob:["date of birth","dob","birth date"],gender:["gender","sex"],nationality:["nationality"],maritalStatus:["marital status"],passportNo:["passport number","passport no"],passportIssuePlace:["place of issue","passport issue place","issued at"],passportIssueDate:["date of issue","passport issue date"],passportExpiryDate:["date of expiry","passport expiry","expiry date"],previousPassportVisa:["previous visa","previous passport","old passport"],phone:["mobile number","mobile no","phone number","telephone","contact number"],email:["email address","email id","e-mail"],presentAddress:["present address","current address","residential address"],district:["district"],postCode:["pin code","postal code","postcode","zip code"],fatherName:["father name","father's name"],motherName:["mother name","mother's name"],spouseName:["spouse name","husband name","wife name"],profession:["profession","occupation"],employer:["employer","company name","organization","organisation","business"],visaType:["visa type","type of visa"],purpose:["purpose of visit","purpose"],mission:["select a mission","mission"],ivacCenter:["ivac center","ivac centre","visa application center","visa application centre"],stayAddress:["place of stay","hotel name","hotel address","address in india","stay/hotel"],webFileNumber:["web file","webfile number"],indiaRefName:["reference in india","india reference name"],indiaRefAddress:["reference address in india","india reference address"],indiaRefPhone:["reference phone in india","india reference phone","india reference contact"],bdRefName:["reference in bangladesh","bangladesh reference name"],bdRefAddress:["reference address in bangladesh","bangladesh reference address"],bdRefPhone:["reference phone in bangladesh","bangladesh reference phone","bangladesh reference contact"]};
+const norm=s=>String(s||"").toLowerCase().replace(/\s+/g," ").trim();
+function meta(e){let a=[];if(e.labels)a.push(...[...e.labels].map(x=>x.innerText));let p=e.closest("div,td,li,fieldset");if(p)a.push(p.innerText?.slice(0,180));return norm([e.name,e.id,e.placeholder,e.getAttribute("aria-label"),e.getAttribute("autocomplete"),...a].filter(Boolean).join(" "))}
+function find(patterns){return [...document.querySelectorAll("input,textarea,select")].find(e=>patterns.some(p=>meta(e).includes(norm(p))))}
+function set(e,v){if(!e||!v)return false;if(e.tagName==="SELECT"){let w=norm(v),o=[...e.options].find(x=>norm(x.value)===w||norm(x.textContent)===w||norm(x.textContent).includes(w));if(!o)return false;e.value=o.value}else{let proto=e.tagName==="TEXTAREA"?HTMLTextAreaElement.prototype:HTMLInputElement.prototype,setter=Object.getOwnPropertyDescriptor(proto,"value")?.set;if(setter)setter.call(e,v);else e.value=v}["input","change","blur"].forEach(x=>e.dispatchEvent(new Event(x,{bubbles:true})));return true}
+function clear(e){if(e.disabled||e.readOnly||["hidden","button","submit"].includes(e.type))return false;if(e.type==="checkbox"||e.type==="radio"){if(e.checked)e.click();return false}if(e.tagName==="SELECT")e.selectedIndex=0;else{let proto=e.tagName==="TEXTAREA"?HTMLTextAreaElement.prototype:HTMLInputElement.prototype,setter=Object.getOwnPropertyDescriptor(proto,"value")?.set;if(setter)setter.call(e,"");else e.value=""}e.dispatchEvent(new Event("input",{bubbles:true}));e.dispatchEvent(new Event("change",{bubbles:true}));return true}
+chrome.runtime.onMessage.addListener((m,s,r)=>{if(m?.type==="FILL_FORM"){let n=0;for(let[k,v]of Object.entries(m.data||{}))if(v&&MAP[k]&&set(find(MAP[k]),v))n++;r({message:"Auto Fill: "+n+" field(s) filled."})}if(m?.type==="CLEAR_FORM"){let n=0;document.querySelectorAll("input,textarea,select").forEach(e=>{if(clear(e))n++});r({message:"Clear Form: "+n+" field(s) cleared."})}return true});
