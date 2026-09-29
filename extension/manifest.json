@@ -1,19 +1,10 @@
 {
-  "manifest_version": 3,
-  "name": "IVAC Assistant",
-  "version": "1.0.0",
-  "description": "A lightweight IVAC form-assistance Chrome extension.",
-  "permissions": ["storage"],
-  "host_permissions": ["https://www.ivacbd.com/*", "https://ivacbd.com/*"],
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "IVAC Assistant"
-  },
-  "content_scripts": [
-    {
-      "matches": ["https://www.ivacbd.com/*", "https://ivacbd.com/*"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
-    }
-  ]
+  "manifest_version":3,
+  "name":"IVAC Assistant",
+  "version":"2.0.0",
+  "description":"Multiple applicant profiles and form assistance for IVAC.",
+  "permissions":["storage"],
+  "host_permissions":["https://www.ivacbd.com/*","https://ivacbd.com/*","https://www.indianvisa-bangladesh.nic.in/*","https://indianvisa-bangladesh.nic.in/*","https://appointment.ivacbd.com/*"],
+  "action":{"default_popup":"popup.html","default_title":"IVAC Assistant"},
+  "content_scripts":[{"matches":["https://www.ivacbd.com/*","https://ivacbd.com/*","https://www.indianvisa-bangladesh.nic.in/*","https://indianvisa-bangladesh.nic.in/*","https://appointment.ivacbd.com/*"],"js":["content.js"],"run_at":"document_idle"}]
 }
