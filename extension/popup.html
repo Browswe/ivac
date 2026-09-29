@@ -1,28 +1,26 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>IVAC Assistant</title>
-  <style>
-    body{font-family:Arial,sans-serif;width:300px;margin:0;padding:16px;background:#f7f9fc;color:#172033}
-    h2{margin:0 0 8px;font-size:20px}
-    p{font-size:12px;color:#667085}
-    input{width:100%;box-sizing:border-box;padding:9px;margin:5px 0;border:1px solid #d0d5dd;border-radius:7px}
-    button{width:100%;padding:10px;margin-top:8px;border:0;border-radius:7px;background:#1463ff;color:#fff;cursor:pointer}
-    button.secondary{background:#e8eefc;color:#173b7a}
-    #status{font-size:12px;margin-top:8px}
-  </style>
-</head>
-<body>
-  <h2>IVAC Assistant</h2>
-  <p>Save your own form details for faster manual form completion.</p>
-  <input id="name" placeholder="Full name">
-  <input id="passport" placeholder="Passport number">
-  <input id="phone" placeholder="Phone number">
-  <button id="save">Save details</button>
-  <button id="fill" class="secondary">Fill current IVAC form</button>
-  <button id="open">Open IVAC</button>
-  <div id="status"></div>
-  <script src="popup.js"></script>
-</body>
-</html>
+<!doctype html><html><head><meta charset="utf-8"><title>IVAC Assistant</title><style>
+*{box-sizing:border-box}body{font:13px Arial;width:390px;margin:0;padding:14px;background:#f5f7fb;color:#172033}h2{margin:0 0 4px}.muted{font-size:11px;color:#667085}.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}input,select{width:100%;padding:8px;border:1px solid #d0d5dd;border-radius:6px}label{display:block;font-size:11px;font-weight:600;margin:6px 0 2px}.full{grid-column:1/-1}button{width:100%;padding:9px;margin-top:7px;border:0;border-radius:7px;background:#155eef;color:white;font-weight:600}button.s{background:#e8eefc;color:#173b7a}button.d{background:#d92d20}.status{font-size:11px;margin-top:8px;min-height:16px}</style></head><body>
+<h2>IVAC Assistant</h2><div class="muted">Multiple profiles • Save • Auto Fill • Clear</div>
+<label>Applicant Profile</label><div class="grid"><select id="profile" class="full"></select><input id="profileName" placeholder="Profile name"><button id="new" class="s">New Profile</button></div>
+<div class="grid">
+<div><label>Given Name</label><input id="givenName"></div><div><label>Surname</label><input id="surname"></div>
+<div><label>Date of Birth</label><input id="dob" type="date"></div><div><label>Gender</label><input id="gender"></div>
+<div><label>Nationality</label><input id="nationality" value="Bangladesh"></div><div><label>Marital Status</label><input id="maritalStatus"></div>
+<div><label>Passport No.</label><input id="passportNo"></div><div><label>Passport Issue Place</label><input id="passportIssuePlace"></div>
+<div><label>Passport Issue Date</label><input id="passportIssueDate" type="date"></div><div><label>Passport Expiry</label><input id="passportExpiryDate" type="date"></div>
+<div class="full"><label>Previous Passport / Visa No.</label><input id="previousPassportVisa"></div>
+<div><label>Mobile</label><input id="phone"></div><div><label>Email</label><input id="email"></div>
+<div class="full"><label>Present Address</label><input id="presentAddress"></div><div><label>District</label><input id="district"></div><div><label>Post Code</label><input id="postCode"></div>
+<div><label>Father's Name</label><input id="fatherName"></div><div><label>Mother's Name</label><input id="motherName"></div><div class="full"><label>Spouse Name</label><input id="spouseName"></div>
+<div><label>Profession</label><input id="profession"></div><div><label>Employer / Business</label><input id="employer"></div>
+<div><label>Visa Type</label><input id="visaType"></div><div><label>Purpose</label><input id="purpose"></div>
+<div><label>Mission</label><input id="mission" placeholder="Sylhet"></div><div><label>IVAC Center</label><input id="ivacCenter" placeholder="Sylhet"></div>
+<div class="full"><label>Stay / Hotel in India</label><input id="stayAddress"></div><div><label>Web File No.</label><input id="webFileNumber"></div>
+<div><label>India Reference Name</label><input id="indiaRefName"></div><div><label>India Reference Phone</label><input id="indiaRefPhone"></div>
+<div class="full"><label>India Reference Address</label><input id="indiaRefAddress"></div>
+<div><label>Bangladesh Reference Name</label><input id="bdRefName"></div><div><label>Bangladesh Reference Phone</label><input id="bdRefPhone"></div>
+<div class="full"><label>Bangladesh Reference Address</label><input id="bdRefAddress"></div>
+</div>
+<div class="grid"><button id="save">Save Profile</button><button id="fill" class="s">Auto Fill</button><button id="clear" class="s">Clear Form</button><button id="del" class="d">Delete Profile</button></div>
+<button id="clearProfiles" class="d">Clear All Saved Profiles</button><button id="open" class="s">Open Indian Visa Form</button><div id="status" class="status"></div>
+<script src="popup.js"></script></body></html>
